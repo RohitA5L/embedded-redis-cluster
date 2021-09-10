@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.hq112415</groupId>
+  <artifactId>embedded-redis-cluster</artifactId>
+  <packaging>jar</packaging>
+  <version>1.1.0</version>
+  <name>embedded-redis-cluster</name>
+  <description>Redis embedded server for Java integration testing.
+    Project forked from https://github.com/aarondwi/embedded-redis-cluster and improve redis version
+  </description>
+  <url>https://github.com/hq112415/embedded-redis-cluster</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>actable</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>hq112415</name>
+      <email>hq112415@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <tag>master</tag>
+    <url>git@github.com:hq112415/embedded-redis-cluster.git</url>
+    <connection>scm:git:git@github.com:hq112415/embedded-redis-cluster.git</connection>
+    <developerConnection>scm:git:git@github.com:hq112415/embedded-redis-cluster.git</developerConnection>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+    <!-- TEST DEPENDENCIES -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>2.1.10.RELEASE</version>
+    </dependency>
+
+  </dependencies>
+
+</project>
