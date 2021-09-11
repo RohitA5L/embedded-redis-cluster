@@ -150,7 +150,7 @@
                 <configuration>
                   <!--gpg sig3 -->
                   <keyname>0x1EF4FB9A</keyname>
-                  <passphraseServerId>0x1EF4FB9A</passphraseServerId>
+                  <!--<passphraseServerId>0x1EF4FB9A</passphraseServerId>-->
                 </configuration>
               </execution>
             </executions>

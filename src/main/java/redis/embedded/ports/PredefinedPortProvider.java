@@ -17,6 +17,7 @@ public class PredefinedPortProvider implements PortProvider {
         this.current = this.ports.iterator();
     }
 
+    @Override
     public synchronized int next() {
         if (!current.hasNext()) {
             throw new RedisBuildingException("Run out of Redis ports!");
