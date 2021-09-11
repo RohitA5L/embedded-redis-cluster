@@ -11,11 +11,14 @@ Fork Notes
 
 Maven dependency
 ==============
+```json
 <dependency>
   <groupId>io.github.hq112415</groupId>
   <artifactId>embedded-redis-cluster</artifactId>
   <version>1.1.0</version>
 </dependency>
+```
+
 
 
 ## Cluster Usage
