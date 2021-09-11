@@ -18,7 +18,6 @@ public class SequencePortProvider implements PortProvider {
         currentPort.set(port);
     }
 
-    @Override
     public int next() {
         return currentPort.getAndIncrement();
     }

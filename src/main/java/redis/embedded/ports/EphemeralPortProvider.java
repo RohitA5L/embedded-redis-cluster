@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class EphemeralPortProvider implements PortProvider {
-    @Override
     public int next() {
         try {
             final ServerSocket socket = new ServerSocket(0);

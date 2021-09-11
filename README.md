@@ -5,11 +5,17 @@ Embedded Redis Cluster for Java integration testing
 
 Fork Notes
 ==============
-本项目clone自 [aarondwi](https://github.com/aarondwi/embedded-redis-cluster)，主要升级redis至6.2.2版本，原项目redis版本为3.0.7，个人开发机为Apple m1芯片不支持此版本
+本项目clone自 [aarondwi](https://github.com/aarondwi/embedded-redis-cluster)，主要修改：
+1. 升级mac os环境的redis-server执行文件至6.2.2版本，原项目redis-server版本为3.0.7，个人开发机为Apple M1芯片不支持此版本
+2. 优化redis-server启动错误日志显示；
 
 Maven dependency
 ==============
-Not yet
+<dependency>
+  <groupId>io.github.hq112415</groupId>
+  <artifactId>embedded-redis-cluster</artifactId>
+  <version>1.1.0</version>
+</dependency>
 
 
 ## Cluster Usage
