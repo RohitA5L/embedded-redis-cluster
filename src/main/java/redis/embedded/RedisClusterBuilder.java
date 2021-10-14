@@ -14,8 +14,8 @@ public class RedisClusterBuilder {
     private PortProvider replicationGroupPortProvider = new SequencePortProvider(6379);
     private final List<ReplicationGroup> groups = new LinkedList<ReplicationGroup>();
 
-	private final List<Integer> mastersPorts = new ArrayList<>();
-	private final List<Integer> slavesPorts = new ArrayList<>();
+	private final List<Integer> mastersPorts = new ArrayList<Integer>();
+	private final List<Integer> slavesPorts = new ArrayList<Integer>();
 
     public RedisClusterBuilder withServerBuilder(RedisServerBuilder serverBuilder) {
         this.serverBuilder = serverBuilder;

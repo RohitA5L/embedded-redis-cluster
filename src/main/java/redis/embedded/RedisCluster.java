@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import org.springframework.data.redis.connection.convert.ListConverter;
+
 public class RedisCluster implements Redis {
     private final List<Redis> servers = new LinkedList<Redis>();
 
@@ -65,9 +67,12 @@ public class RedisCluster implements Redis {
 
 					Integer finalI = i;
 					Pipeline jp = j.pipelined();
-					IntStream.range(0, 16384).filter(
-						is -> Integer.valueOf(is % mastersPorts.size()).equals(finalI)
-					).forEach(jp::clusterAddSlots);
+
+					for (Integer is = 0; is < 16384; is++) {
+						if (Integer.valueOf(is % mastersPorts.size()).equals(finalI)) {
+							jp.clusterAddSlots(is);
+						}
+					}
 					jp.sync();
 
 				} catch (Exception e) {
