@@ -24,13 +24,8 @@ public class RedisExecProvider {
     }
 
     private void initExecutables() {
-        executables.put(OsArchitecture.WINDOWS_x86_64, "redis-server.exe");
-        executables.put(OsArchitecture.UNIX_x86_64, "redis-server-3.0.7");
-        executables.put(OsArchitecture.MAC_OS_X_x86_64, "redis-server-3.0.7.app");
-
-        //just for Apple m1 mac
-        executables.put(new OsArchitecture(OS.MAC_OS_X, Architecture.x86), "redis-server-6.2");
-        executables.put(new OsArchitecture(OS.MAC_OS_X, Architecture.x86_64), "redis-server-6.2");
+        executables.put(OsArchitecture.UNIX_x86_64, "redis-server-6.0.5");
+        executables.put(OsArchitecture.MAC_OS_X_x86_64, "redis-server-6.0.5.app");
     }
 
     public RedisExecProvider override(OS os, String executable) {
