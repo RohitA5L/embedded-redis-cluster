@@ -126,5 +126,6 @@ public class RedisClusterTest {
     @After
     public void tearDown() throws Exception {
 		this.cluster.stop();
+		this.ephemeralCluster.stop();
     }
 }
