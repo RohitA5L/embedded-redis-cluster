@@ -1,15 +1,15 @@
 package redis.embedded;
 
+import com.google.common.collect.Lists;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Protocol;
 import redis.embedded.exceptions.EmbeddedRedisException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-import org.springframework.data.redis.connection.convert.ListConverter;
 
 public class RedisCluster implements Redis {
     private final List<Redis> servers = new LinkedList<Redis>();
@@ -49,7 +49,7 @@ public class RedisCluster implements Redis {
          */
 		Integer clusterMeetTarget = mastersPorts.get(0);
 		Jedis j = null;
-
+		List<String> masterNodeIds = Lists.newArrayList();
 		/*
 		 * for every master
 		 * meet them (except the `seed` master)
@@ -74,6 +74,9 @@ public class RedisCluster implements Redis {
 						}
 					}
 					jp.sync();
+
+					String myId = new String((byte[]) j.sendCommand(Protocol.Command.CLUSTER, "myid"));
+					masterNodeIds.add(myId);
 
 				} catch (Exception e) {
 					EmbeddedRedisException err = new EmbeddedRedisException(
@@ -100,17 +103,23 @@ public class RedisCluster implements Redis {
 		 */
 		Thread.sleep(mastersPorts.size() * 300);
 
+		int slavesPerShard = slavesPorts.size() / mastersPorts.size();
+
 		/*
 		 * meet every slave to the MEET target
 		 */
 		try {
-			for(Integer sp : slavesPorts) {
+			for(int i = 0; i < slavesPorts.size(); i++) {
 				try {
-					j = new Jedis("127.0.0.1", sp);
+					j = new Jedis("127.0.0.1", slavesPorts.get(i));
 					j.clusterMeet("127.0.0.1", clusterMeetTarget);
+
+					Thread.sleep(1000);
+
+					j.clusterReplicate(masterNodeIds.get(i / slavesPerShard));
 				} catch (Exception e) {
 					EmbeddedRedisException err = new EmbeddedRedisException(
-						"Failed creating slave instance at port: "+ sp);
+						"Failed creating slave instance at port: "+ slavesPorts.get(i));
 					err.setStackTrace(e.getStackTrace());
 					throw err;
 				} finally {
@@ -152,6 +161,10 @@ public class RedisCluster implements Redis {
         ports.addAll(slavesPorts);
         return ports;
     }
+
+	public List<Redis> getServers() {
+		return servers;
+	}
 
     public static RedisClusterBuilder builder() {
         return new RedisClusterBuilder();
