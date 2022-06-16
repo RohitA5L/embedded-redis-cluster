@@ -4,15 +4,12 @@ import com.google.common.collect.Lists;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Protocol;
-import redis.clients.jedis.commands.ProtocolCommand;
 import redis.embedded.exceptions.EmbeddedRedisException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-import org.springframework.data.redis.connection.convert.ListConverter;
 
 public class RedisCluster implements Redis {
     private final List<Redis> servers = new LinkedList<Redis>();
@@ -164,6 +161,10 @@ public class RedisCluster implements Redis {
         ports.addAll(slavesPorts);
         return ports;
     }
+
+	public List<Redis> getServers() {
+		return servers;
+	}
 
     public static RedisClusterBuilder builder() {
         return new RedisClusterBuilder();
